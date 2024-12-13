@@ -50,7 +50,7 @@ version = "0.1.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.ast_node]]
-version = "2.0.0"
+version = "3.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.autocfg]]
@@ -214,7 +214,7 @@ version = "0.2.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.fastrand]]
-version = "2.1.1"
+version = "2.2.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.float-cmp]]
@@ -338,11 +338,7 @@ version = "1.3.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.libc]]
-version = "0.2.159"
-criteria = "safe-to-deploy"
-
-[[exemptions.libfuzzer-sys]]
-version = "0.4.7"
+version = "0.2.167"
 criteria = "safe-to-deploy"
 
 [[exemptions.libloading]]
@@ -462,11 +458,11 @@ version = "0.1.21"
 criteria = "safe-to-deploy"
 
 [[exemptions.ptr_meta]]
-version = "0.1.4"
+version = "0.3.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.ptr_meta_derive]]
-version = "0.1.4"
+version = "0.3.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.radium]]
@@ -525,10 +521,6 @@ criteria = "safe-to-deploy"
 version = "1.1.1"
 criteria = "safe-to-deploy"
 
-[[exemptions.sha2]]
-version = "0.10.8"
-criteria = "safe-to-deploy"
-
 [[exemptions.shellexpand]]
 version = "2.1.2"
 criteria = "safe-to-deploy"
@@ -542,7 +534,7 @@ version = "0.7.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.simd-json]]
-version = "0.14.2"
+version = "0.14.3"
 criteria = "safe-to-deploy"
 
 [[exemptions.simdutf8]]
@@ -582,39 +574,39 @@ version = "1.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_allocator]]
-version = "1.0.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.swc_atoms]]
 version = "2.0.0"
 criteria = "safe-to-deploy"
 
-[[exemptions.swc_common]]
+[[exemptions.swc_atoms]]
 version = "3.0.0"
+criteria = "safe-to-deploy"
+
+[[exemptions.swc_common]]
+version = "5.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_core]]
-version = "4.0.3"
+version = "8.0.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_ecma_ast]]
-version = "3.0.0"
+version = "5.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_ecma_parser]]
-version = "4.0.0"
+version = "6.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_ecma_transforms_base]]
-version = "4.0.1"
+version = "6.0.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_ecma_utils]]
-version = "4.0.0"
+version = "6.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_ecma_visit]]
-version = "3.0.0"
+version = "5.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.swc_eq_ignore_macros]]
@@ -630,7 +622,7 @@ version = "2.0.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.tempfile]]
-version = "3.13.0"
+version = "3.14.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.tinyvec_macros]]
@@ -698,7 +690,7 @@ version = "0.1.3"
 criteria = "safe-to-deploy"
 
 [[exemptions.walrus]]
-version = "0.22.0"
+version = "0.23.2"
 criteria = "safe-to-deploy"
 
 [[exemptions.walrus-macro]]

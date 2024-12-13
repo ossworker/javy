@@ -46,14 +46,14 @@ use transform::SourceCodeSection;
 use walrus::{
     DataId, DataKind, ExportItem, FunctionBuilder, FunctionId, LocalId, MemoryId, Module, ValType,
 };
-use wasi_common::{pipe::ReadPipe, sync::WasiCtxBuilder, WasiCtx};
 use wasm_opt::{OptimizationOptions, ShrinkLevel};
+use wasmtime_wasi::{pipe::MemoryInputPipe, WasiCtxBuilder};
 use wizer::{Linker, Wizer};
 
 use crate::{js_config::JsConfig, plugins::Plugin, JS};
 use anyhow::Result;
 
-static mut WASI: OnceLock<WasiCtx> = OnceLock::new();
+static STDIN_PIPE: OnceLock<MemoryInputPipe> = OnceLock::new();
 
 pub(crate) enum CodeGenType {
     /// Static code generation.
@@ -141,21 +141,27 @@ impl Generator {
             CodeGenType::Static => {
                 // Copy config JSON into stdin for `initialize_runtime` function.
                 let runtime_config = self.js_runtime_config.to_json()?;
-                unsafe {
-                    WASI.get_or_init(|| {
-                        WasiCtxBuilder::new()
-                            .inherit_stderr()
-                            .inherit_stdout()
-                            .stdin(Box::new(ReadPipe::from(runtime_config)))
-                            .build()
-                    });
-                };
+                STDIN_PIPE
+                    .set(MemoryInputPipe::new(runtime_config))
+                    .unwrap();
                 let wasm = Wizer::new()
                     .init_func("initialize_runtime")
                     .make_linker(Some(Rc::new(move |engine| {
                         let mut linker = Linker::new(engine);
-                        wasi_common::sync::add_to_linker(&mut linker, |_| unsafe {
-                            WASI.get_mut().unwrap()
+                        wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, move |cx| {
+                            if cx.wasi_ctx.is_none() {
+                                // The underlying buffer backing the pipe is an Arc
+                                // so the cloning should be fast.
+                                let config = STDIN_PIPE.get().unwrap().clone();
+                                cx.wasi_ctx = Some(
+                                    WasiCtxBuilder::new()
+                                        .stdin(config)
+                                        .inherit_stdout()
+                                        .inherit_stderr()
+                                        .build_p1(),
+                                );
+                            }
+                            cx.wasi_ctx.as_mut().unwrap()
                         })?;
                         Ok(linker)
                     })))?
