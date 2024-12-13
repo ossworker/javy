@@ -120,15 +120,15 @@ impl Runtime {
             }
 
             if intrinsics.contains(JSIntrinsics::BIG_FLOAT) {
-                unsafe { intrinsic::BigFloat::add_intrinsic(ctx.as_raw()) }
+                // unsafe { intrinsic::BigFloat::add_intrinsic(ctx.as_raw()) }
             }
 
             if intrinsics.contains(JSIntrinsics::BIG_DECIMAL) {
-                unsafe { intrinsic::BigDecimal::add_intrinsic(ctx.as_raw()) }
+                // unsafe { intrinsic::BigDecimal::add_intrinsic(ctx.as_raw()) }
             }
 
             if intrinsics.contains(JSIntrinsics::BIGNUM_EXTENSION) {
-                unsafe { intrinsic::BignumExt::add_intrinsic(ctx.as_raw()) }
+                // unsafe { intrinsic::BignumExt::add_intrinsic(ctx.as_raw()) }
             }
 
             if intrinsics.contains(JSIntrinsics::TEXT_ENCODING) {
